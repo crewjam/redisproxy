@@ -23,6 +23,7 @@ func main() {
 	}
 }
 
+// Main is a wrapper for main()
 func Main() error {
 	configPath := flag.String("config", "", "The path to the config file")
 	listen := flag.String("listen", ":6380", "The address to listen on")
@@ -89,6 +90,6 @@ func Main() error {
 	log.WithField("address", *listen).Info("received shutdown signal")
 
 	listener.Close()
-
-	return <-errCh
+	<-errCh
+	return nil
 }
