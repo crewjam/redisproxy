@@ -1,13 +1,16 @@
 language: go
-
 go:
- - 1.5
- - 1.6
-
+- 1.6
 install:
- - go get -t ./...
- - go generate .
-
+- go get -t ./...
+- go generate .
 script:
- - go test -v ./...
-
+- GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags '-s' -o redisproxy.Linux_amd64 main.go
+- go test -v ./...
+deploy:
+  provider: releases
+  api_key:
+    secure: Lx5BaY8HB4D3JhmgqJCk3KNcXSQCRu1A0kNZM/Eaomf2Skwo7SnbZh2x0oddzdiYIWecnM2841bGU9TaAVgfIlBZalYgfBTkP3BZYa5azXhKxw+vimC+o8R/KTAdKy/c/TY4T+uCHZe74vTY6mJ9LWGOrMlFijTYNKPkI+nhWvzwxhwTuC1cCDNJBvri+F4ANF2DcsfNtfoYugt+By9BmfrGMzlEbQu7XSjz1b76PZyPrCAn7ga/u7Kr6Ylmy5tK30j3M7fbiZt1En0nww5bewY44yONl07JZFNigKQIOUk0hGphTra5/Pde35UgHpCfm8Z4gO/k2xDuOUaTOpYnZsmC1wCJKzQepzbOS8tIj6d3B6iGI2WW6E+/DljgobJP1sW1BALCcURwu3Xa6xVFTgxQJU+DgpVPYf50dfRuQ7xgDTSox9sPFuP5ZKEc9TdlTyXLesO4wA/LdpHTHDvtJ/+hszIMreJ1S+dLnDQiq6rMsBpMA+80I8SxK2QV0UCoAgJXciku/wchpXc5EZLa4JXVp10w5EOfgOhAiYaVcrMdhO1NP+SSpxurQnxwmDjtIVsazgZNsfgTvuWIxFPHXq8jrMUxbMdMoEMBHZdhUMAE7OE9wjotxPAE/SVyG3w2sPXq4D8vwc7lcLvNJlGR3/zNpM5bp49Lm9sXXeEAqmw=
+  file: redisproxy.Linux_amd64
+  on:
+    repo: crewjam/redisproxy
