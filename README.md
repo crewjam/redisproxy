@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/crewjam/redisproxy.svg?branch=master)](https://travis-ci.org/crewjam/redisproxy) [![](https://godoc.org/github.com/crewjam/redisproxy?status.png)](https://godoc.org/github.com/crewjam/redisproxy/lib)
+
 # Redis Proxy
 
 This program is a proxy for redis that adds access controls and TLS client authentication.
